@@ -1,6 +1,6 @@
 <!-- .slide: data-background-image="images/spring.png" data-background-size="1200px" class="chapter" -->
 ## 1
-### Spring core : rappels
+### API Sirene : principes
 
 
 
