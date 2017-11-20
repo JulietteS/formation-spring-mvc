@@ -15,7 +15,7 @@ Obtenir les informations du répertoire sur une unité légale, identifiée par 
 GET /ws/siren/{siren}
 GET /ws/siren/{siren}?date={date}
 | Paramètre               | Description | Type de paramètre | Type  | Obligatoire                              |
-| ----------------------- | ---------------------------------------------------------------------------------- |
+| ----------------------- | ------------|-------------------|-------|----------------------------------------- |
 | `siren`          | Numéro siren de l'entreprise (9 chiffres) | Path | String | Oui |
 | `date`          | Date à laquelle on souhaite connaître l'état (AAAA-MM-JJ) | Query | String | Non |
 | `Insee-source`| Information sur l'appelant. Doit être valorisé sous la forme Organisme:{Organisme},Application:{Application}|Header|String| Oui |
@@ -25,7 +25,7 @@ GET /ws/siren/{siren}?date={date}
 ### Codes retour
 
 | Code HTTP             | Résumé | Raison                               |
-| ----------------------- | ---------------------------------------------------------------------------------- |
+| --------------------- | -------|------------------------------------- |
 | `200`          | OK | Entreprise trouvée |
 | `400`          | Bad Request | Paramètres incorrects ou manquants |
 | `401`          | Unauthorized | Tentative de connection avec une adresse IP non autorisée |
