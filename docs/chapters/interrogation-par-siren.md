@@ -190,6 +190,7 @@ GET /ws/siren/005520135
 ### Exemple de requête sur le siren (2)
 
 GET /ws/siren/005520135?date=2018-01-01
+
 Période courante
 
 ```json
@@ -242,9 +243,10 @@ Période courante
 
 
 <!-- .slide: class="slide" -->
-### Exemple de requête sur le siren (2)
+### Exemple de requête sur le siren (3)
 
 GET /ws/siren/005520135?date=2018-01-01
+
 Période trop ancienne
 ```json
 {
