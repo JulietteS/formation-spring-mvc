@@ -1,5 +1,5 @@
 <!-- .slide: data-background-image="images/spring.png" data-background-size="1200px" class="chapter" -->
-## 1
+## 2
 ### API Sirene : recherche sur les unités légales
 
 <!-- .slide: class="slide" -->
@@ -14,51 +14,173 @@ Obtenir les informations du répertoire sur une unité légale, identifiée par 
 
 GET /ws/siren/{siren}
 GET /ws/siren/{siren}?date={date}
+
 | Paramètre               | Description | Type de paramètre | Type  | Obligatoire                              |
 | ----------------------- | ------------|-------------------|-------|----------------------------------------- |
-| `siren`          | Numéro siren de l'entreprise (9 chiffres) | Path | String | Oui |
-| `date`          | Date à laquelle on souhaite connaître l'état (AAAA-MM-JJ) | Query | String | Non |
-| `Insee-source`| Information sur l'appelant. Doit être valorisé sous la forme Organisme:{Organisme},Application:{Application}|Header|String| Oui |
-| `Accept`| Format de la réponse demandé (par défaut Application/json), demander Text/csv pour du CSV |Header|String| Non |
+| `siren`                 | Numéro siren de l'entreprise (9 chiffres) | Path | String | Oui 												       |
+| `date`                  | Date à laquelle on souhaite connaître l'état (AAAA-MM-JJ) | Query | String | Non   |
+| `Insee-source`          | Information sur l'appelant. Doit être valorisé sous la forme Organisme:{Organisme}, Application:{Application}|Header|String| Oui |
+| `Accept`                | Format de la réponse demandé (par défaut Application/json), demander Text/csv pour du CSV |Header|String| Non |
  
 <!-- .slide: class="slide" -->
 ### Codes retour
 
-| Code HTTP             | Résumé | Raison                               |
-| --------------------- | -------|------------------------------------- |
-| `200`          | OK | Entreprise trouvée |
-| `400`          | Bad Request | Paramètres incorrects ou manquants |
-| `401`          | Unauthorized | Tentative de connection avec une adresse IP non autorisée |
-| `403`          | Forbidden | Droits insuffisants pour accéder à cette unité |
-| `404`          | Not Found | Unité non trouvée (siren inexistant ou pas encore créé à la date demandée) |
+| Code HTTP      | Résumé         | Raison                               |
+| -------------- | ---------------|------------------------------------- |
+| `200`          | OK             | Entreprise trouvée |
+| `400`          | Bad Request    | Paramètres incorrects ou manquants |
+| `401`          | Unauthorized   | Tentative de connection avec une adresse IP non autorisée |
+| `403`          | Forbidden      | Droits insuffisants pour accéder à cette unité |
+| `404`          | Not Found      | Unité non trouvée (siren inexistant ou pas encore créé à la date demandée) |
 | `406`          | Not acceptable | Format demandé non prévu |
+| `500`          | Internal Server Error | Ca se passe mal pour le serveur |
+| `503`          | Service Unvailable | Ca se passe *très* mal pour le serveur |
 
 <!-- .slide: class="slide" -->
-### Beans et injection des dépendances
-Par annotation, version `@Autowired`
-```java
-@Repository
-public class AdresseDaoImpl implements AdresseDao {
-```
-```java
-@Service
-public class AdresseServiceImpl implements AdresseService {
+### Exemple de requête sur le siren
 
-@Autowired
-private AdresseDao adresseDao;
-```
-Par annotation, version `@Resource`
-```java
-@Repository("adresseDao1")
-public class AdresseDaoImpl implements AdresseDao {
-```
-```java
-@Service
-public class AdresseServiceImpl implements AdresseService {
+GET /ws/siren/005520135
 
-@Resource(name = "adresseDao1")
-private AdresseDao adresseDao;
-```
+```json
+{
+    "Header": {
+        "Statut": 200,
+        "Message": "ok"
+    },
+    "UniteLegale": {
+        "Siren": "005520135",
+        "StatutDiffusionUniteLegale": "O",
+        "DateCreationUniteLegale": "1955-01-01",
+        "Sigle": null,
+        "Sexe": null,
+        "NomUsage": null,
+        "Prenom1": null,
+        "Prenom2": null,
+        "Prenom3": null,
+        "Prenom4": null,
+        "PrenomUsuel": null,
+        "CaractereEmployeur": "O",
+        "TrancheEffectifsUniteLegale": "NN",
+        "AnneeEffectifsUniteLegale": null,
+        "NombrePeriodes": 6,
+        "Periodes": [
+            {
+                "DateFin": null,
+                "DateDebut": "2007-11-19",
+                "EtatAdministratif": "C",
+                "IndEtatAdministratif": true,
+                "Nom": null,
+                "Denomination": "CHANVI GESTION",
+                "IndDesignation": false,
+                "ActivitePrincipale": "74.1J",
+                "LibelleActivite": "Administration d'entreprises",
+                "NomenclatureActivite": "NAFRev1",
+                "IndActivitePrincipale": false,
+                "CategorieJuridique": "5710",
+                "IndCategorieJuridique": false,
+                "CategorieProfessionnelle": null,
+                "IndCategorieProfessionnelle": false,
+                "NICSiege": "00038",
+                "IndNICSiege": false
+            },
+            {
+                "DateFin": "2007-11-18",
+                "DateDebut": "2007-04-20",
+                "EtatAdministratif": "A",
+                "IndEtatAdministratif": false,
+                "Nom": null,
+                "Denomination": "CHANVI GESTION",
+                "IndDesignation": false,
+                "ActivitePrincipale": "74.1J",
+                "LibelleActivite": "Administration d'entreprises",
+                "NomenclatureActivite": "NAFRev1",
+                "IndActivitePrincipale": false,
+                "CategorieJuridique": "5710",
+                "IndCategorieJuridique": false,
+                "CategorieProfessionnelle": null,
+                "IndCategorieProfessionnelle": false,
+                "NICSiege": "00038",
+                "IndNICSiege": true
+            },
+            {
+                "DateFin": "2007-04-19",
+                "DateDebut": "2002-12-25",
+                "EtatAdministratif": "A",
+                "IndEtatAdministratif": false,
+                "Nom": null,
+                "Denomination": "CHANVI GESTION",
+                "IndDesignation": false,
+                "ActivitePrincipale": "74.1J",
+                "LibelleActivite": "Administration d'entreprises",
+                "NomenclatureActivite": "NAF1993",
+                "IndActivitePrincipale": false,
+                "CategorieJuridique": "5710",
+                "IndCategorieJuridique": true,
+                "CategorieProfessionnelle": null,
+                "IndCategorieProfessionnelle": false,
+                "NICSiege": "00020",
+                "IndNICSiege": false
+            },
+            {
+                "DateFin": "2002-12-24",
+                "DateDebut": "1995-12-25",
+                "EtatAdministratif": "A",
+                "IndEtatAdministratif": false,
+                "Nom": null,
+                "Denomination": "CHANVI GESTION",
+                "IndDesignation": false,
+                "ActivitePrincipale": "74.1J",
+                "LibelleActivite": "Administration d'entreprises",
+                "NomenclatureActivite": "NAF1993",
+                "IndActivitePrincipale": true,
+                "CategorieJuridique": "5599",
+                "IndCategorieJuridique": false,
+                "CategorieProfessionnelle": null,
+                "IndCategorieProfessionnelle": false,
+                "NICSiege": "00020",
+                "IndNICSiege": false
+            },
+            {
+                "DateFin": "1995-12-24",
+                "DateDebut": "1992-01-01",
+                "EtatAdministratif": "A",
+                "IndEtatAdministratif": false,
+                "Nom": null,
+                "Denomination": "CHANVI GESTION",
+                "IndDesignation": true,
+                "ActivitePrincipale": null,
+                "LibelleActivite": null,
+                "NomenclatureActivite": null,
+                "IndActivitePrincipale": false,
+                "CategorieJuridique": "5599",
+                "IndCategorieJuridique": false,
+                "CategorieProfessionnelle": null,
+                "IndCategorieProfessionnelle": false,
+                "NICSiege": "00020",
+                "IndNICSiege": false
+            },
+            {
+                "DateFin": "1991-12-31",
+                "DateDebut": "1955-01-01",
+                "EtatAdministratif": "A",
+                "IndEtatAdministratif": true,
+                "Nom": null,
+                "Denomination": "CHANVRIERE ABBEVILLOISE",
+                "IndDesignation": true,
+                "ActivitePrincipale": null,
+                "LibelleActivite": null,
+                "NomenclatureActivite": null,
+                "IndActivitePrincipale": true,
+                "CategorieJuridique": "5599",
+                "IndCategorieJuridique": true,
+                "CategorieProfessionnelle": null,
+                "IndCategorieProfessionnelle": true,
+                "NICSiege": "00020",
+                "IndNICSiege": true
+            }
+        ]
+    }
+}
 
 
 
