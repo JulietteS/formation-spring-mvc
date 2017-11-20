@@ -1,5 +1,5 @@
 <!-- .slide: data-background-image="images/spring.png" data-background-size="1200px" class="chapter" -->
-## 2
+## 1
 ### API Sirene : recherche sur les unités légales
 
 <!-- .slide: class="slide" -->
@@ -181,34 +181,76 @@ GET /ws/siren/005520135
         ]
     }
 }
-
+```
 
 
 
 
 <!-- .slide: class="slide" -->
-### Activer la détection des annotations
-```xml
-<context:component-scan base-package="fr.insee" />
+### Exemple de requête sur le siren (2)
+
+GET /ws/siren/005520135?date=2018-01-01
+Période courante
+
+```json
+{
+    "Header": {
+        "Statut": 200,
+        "Message": "ok"
+    },
+    "UniteLegale": {
+        "Siren": "005520135",
+        "StatutDiffusionUniteLegale": "O",
+        "DateCreationUniteLegale": "1955-01-01",
+        "Sigle": null,
+        "Sexe": null,
+        "NomUsage": null,
+        "Prenom1": null,
+        "Prenom2": null,
+        "Prenom3": null,
+        "Prenom4": null,
+        "PrenomUsuel": null,
+        "CaractereEmployeur": "O",
+        "TrancheEffectifsUniteLegale": "NN",
+        "AnneeEffectifsUniteLegale": null,
+        "NombrePeriodes": 6,
+        "Periodes": [
+            {
+                "DateFin": null,
+                "DateDebut": "2007-11-19",
+                "EtatAdministratif": "C",
+                "IndEtatAdministratif": true,
+                "Nom": null,
+                "Denomination": "CHANVI GESTION",
+                "IndDesignation": false,
+                "ActivitePrincipale": "74.1J",
+                "LibelleActivite": "Administration d'entreprises",
+                "NomenclatureActivite": "NAFRev1",
+                "IndActivitePrincipale": false,
+                "CategorieJuridique": "5710",
+                "IndCategorieJuridique": false,
+                "CategorieProfessionnelle": null,
+                "IndCategorieProfessionnelle": false,
+                "NICSiege": "00038",
+                "IndNICSiege": false
+            }
+        ]
+    }
+}
 ```
-
-
 
 
 
 <!-- .slide: class="slide" -->
-### Injection d’une source de propriétés
-Pour externaliser des propriétés non surchargeables par le C.E.I.
-<small>Sinon, utiliser `InseeConfig`</small>
-```
-prefix.key.a=Valeur A
-prefix.key.b=Valeur B
-```
-```java
-@Component
-@PropertySource("classpath:application.properties")
-public class ComponentImpl {
+### Exemple de requête sur le siren (2)
 
-@Value("${prefix.key.a}")
-private String a;
+GET /ws/siren/005520135?date=2018-01-01
+Période trop ancienne
+```json
+{
+    "Header": {
+        "Statut": 404,
+        "Message": "Aucun élément trouvé pour le Siren 005520135 et date 1950-01-01"
+    }
+}
 ```
