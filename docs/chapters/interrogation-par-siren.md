@@ -1,67 +1,37 @@
 <!-- .slide: data-background-image="images/spring.png" data-background-size="1200px" class="chapter" -->
 ## 1
-### API Sirene : principes
-
-
-
-
+### API Sirene : recherche sur les unités légales
 
 <!-- .slide: class="slide" -->
-### Spring core
-Spring core : conteneur qui implémente le *pattern* «&nbsp;inversion de contrôle&nbsp;» (IoC)
-
-Définitions des objets (*bean*)
- - XML : `applicationContext.xml`
- - Annotations
-  - Stéréotypes : `@Component`, `@Service`, `@Repository`, `@Controller`…
-  - Injection : `@Autowired`, `@Resource`, `@Value`…
-  - Configuration : `@Configuration`
-
-
-
-
+### Présentation du service
+Obtenir les informations du répertoire sur une unité légale, identifiée par son <span style="color:red">siren</span>
+ - l'historique complet (sur dénomination, nom de naissance, catégorie juridique, état, nic du siège, activité principale)
+ - l'état à une date donnée
+ - l'état courant (à la date de la base)
 
 <!-- .slide: class="slide" -->
-### Spring core
-Au démarrage de l’application, chargement du contexte
-Web : *listener*
-```xml
-<context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
-</context-param>
-<listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-</listener>
-```
-Batch : de manière explicite en Java
-```java
-try(AbstractApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")){
-    Service service1 = (Service) context.getBean("beanName");
-    Service service2 = context.getBean(Service.class);
-    Service service3 = context.getBean("beanName", Service.class);
-}
-```
+### Appel au service
 
-
-
-
-
+GET /ws/siren/{siren}
+GET /ws/siren/{siren}?date={date}
+| Paramètre               | Description | Type de paramètre | Type  | Obligatoire                              |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| `siren`          | Numéro siren de l'entreprise (9 chiffres) | Path | String | Oui |
+| `date`          | Date à laquelle on souhaite connaître l'état (AAAA-MM-JJ) | Query | String | Non |
+| `Insee-source`| Information sur l'appelant. Doit être valorisé sous la forme Organisme:{Organisme},Application:{Application}|Header|String| Oui |
+| `Accept`| Format de la réponse demandé (par défaut Application/json), demander Text/csv pour du CSV |Header|String| Non |
+ 
 <!-- .slide: class="slide" -->
-### Beans et injection des dépendances
-En XML
-```xml
-<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-    <property name="cacheManager" ref="ehcache" />
-</bean>
-<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-    <property name="configLocation" value="classpath:ehcache.xml" />
-</bean>
-```
+### Codes retour
 
-
-
-
+| Code HTTP             | Résumé | Raison                               |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| `200`          | OK | Entreprise trouvée |
+| `400`          | Bad Request | Paramètres incorrects ou manquants |
+| `401`          | Unauthorized | Tentative de connection avec une adresse IP non autorisée |
+| `403`          | Forbidden | Droits insuffisants pour accéder à cette unité |
+| `404`          | Not Found | Unité non trouvée (siren inexistant ou pas encore créé à la date demandée) |
+| `406`          | Not acceptable | Format demandé non prévu |
 
 <!-- .slide: class="slide" -->
 ### Beans et injection des dépendances
