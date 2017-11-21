@@ -7,7 +7,7 @@
 
 
 <!-- .slide: class="slide" -->
-<h3>Présentation du service</h3>
+### Présentation du service
 Obtenir les informations du répertoire sur une unité légale, identifiée par son <span style="color:red">siren</span>
  - l'historique complet (sur dénomination, nom de naissance, catégorie juridique, état, nic du siège, activité principale)
  - l'état à une date donnée
