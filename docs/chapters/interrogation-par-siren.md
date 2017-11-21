@@ -14,6 +14,9 @@ Obtenir les informations du répertoire sur une unité légale, identifiée par 
  - l'état courant (à la date de la base)
 
 
+
+
+
 <!-- .slide: class="slide" -->
 ### Appel au service
 
@@ -26,7 +29,11 @@ GET /ws/siren/{siren}?date={date}
 | `date`                  | Date à laquelle on souhaite connaître l'état (AAAA-MM-JJ) | Query | String | Non   |
 | `Insee-source`          | Information sur l'appelant. Doit être valorisé sous la forme Organisme:{Organisme}, Application:{Application}|Header|String| Oui |
 | `Accept`                | Format de la réponse demandé (par défaut Application/json), demander Text/csv pour du CSV |Header|String| Non |
- 
+
+
+
+
+
 <!-- .slide: class="slide" -->
 ### Codes retour
 
@@ -40,6 +47,10 @@ GET /ws/siren/{siren}?date={date}
 | `406`          | Not acceptable | Format demandé non prévu |
 | `500`          | Internal Server Error | Ca se passe mal pour le serveur |
 | `503`          | Service Unvailable | Ca se passe *très* mal pour le serveur |
+
+
+
+
 
 <!-- .slide: class="slide" -->
 ### Exemple de requête sur le siren
@@ -191,6 +202,7 @@ GET /ws/siren/005520135
 
 
 
+
 <!-- .slide: class="slide" -->
 ### Exemple de requête sur le siren (2)
 
@@ -244,6 +256,8 @@ Période courante
     }
 }
 ```
+
+
 
 
 
