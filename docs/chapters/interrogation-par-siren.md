@@ -27,7 +27,6 @@ GET /ws/siren/{siren}?date={date}
 | ----------------------- | ------------|-------------------|-------|----------------------------------------- |
 | `siren`                 | Numéro siren de l'entreprise (9 chiffres) | Path | String | Oui 												       |
 | `date`                  | Date à laquelle on souhaite connaître l'état (AAAA-MM-JJ) | Query | String | Non   |
-| `Insee-source`          | Information sur l'appelant. Doit être valorisé sous la forme Organisme:{Organisme}, Application:{Application}|Header|String| Oui |
 | `Accept`                | Format de la réponse demandé (par défaut Application/json), demander Text/csv pour du CSV |Header|String| Non |
 
 
