@@ -1,4 +1,4 @@
 <!-- .slide: class="chapter" -->
-## 6
+## 4
 ### Recherche phonétique
 
