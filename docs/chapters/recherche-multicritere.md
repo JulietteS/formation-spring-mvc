@@ -1832,7 +1832,6 @@ Toutes les variables sont possibles, sauf LibelleActivite et NomenclatureActivit
 
 La recherche se fait par défaut sur tout l'historique, sinon il faut préciser un paramètre date.
 
-Exemples :
  - toutes les unités légales dont la dénomination contient ou a contenu le mot GAZ
  ```
  /ws/siren?q=periode(Denomination:GAZ)
@@ -1897,7 +1896,7 @@ Cela renvoie malgré tout l'intégralité de l'historique.
 
 <!-- .slide: class="slide" -->
 ### Recherche exacte
-**Syntaxe** : nomVariable:"valeur")
+**Syntaxe** : nomVariable:"valeur"
 
  - toutes les unités légales actives au 03/12/2010 ayant la dénomination précise *LE VERRE GALANT*
 ```
@@ -1910,8 +1909,18 @@ Cela renvoie malgré tout l'intégralité de l'historique.
 
 <!-- .slide: class="slide" -->
 ### Utilisation de caractères spéciaux
-
-
+**\*** : permet de remplacer une chaîne de caractères
+```
+/ws/siret?q=ActivitePrincipale:8*
+```
+**?** : permet de remplacer exactement un caractère
+```
+/ws/siret?q=Sigle:SNC?
+```
+**~** : permet de faire une recherche approximative au sens de Damerau-Levenshtein (soit 1 suppression/ajout/permutation, soit 2, par défaut)
+```
+/ws/siret?q=Prenom1:FLORENT~ AND -Prenom1:FLORENT
+```
 
 
 
