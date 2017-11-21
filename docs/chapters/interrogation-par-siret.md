@@ -1,16 +1,17 @@
 <!-- .slide: data-background-image="images/spring.png" data-background-size="1200px" class="chapter" -->
 ## 2
-### Spring MVC : généralités
+### Recherche sur les unités légales
 
 
 
 
 
 <!-- .slide: class="slide" -->
-<h3>Classement des frameworks web en 2017</h3>
-<div class="center">
-    <img src="images/web-frameworks.png" style="width: 500px" />
-</div>
+<h3>Présentation du service</h3>
+Obtenir les informations du répertoire sur une unité légale, identifiée par son <span style="color:red">siren</span>
+ - l'historique complet (sur dénomination, nom de naissance, catégorie juridique, état, nic du siège, activité principale)
+ - l'état à une date donnée
+ - l'état courant (à la date de la base)
 
 
 
