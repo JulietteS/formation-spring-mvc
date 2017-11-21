@@ -1831,6 +1831,7 @@ Toutes les variables sont possibles, sauf LibelleActivite et NomenclatureActivit
 **Syntaxe** : periode(nomVariable:valeur)
 
 La recherche se fait par défaut sur tout l'historique, sinon il faut préciser un paramètre date.
+
 Exemples :
  - toutes les unités légales dont la dénomination contient ou a contenu le mot GAZ
  ```
@@ -1857,11 +1858,65 @@ Exemples :
 
 
 
+
 <!-- .slide: class="slide" -->
 ### Recherche sur plusieurs variables
 **Syntaxe** : nomVariable1:valeur1 *AND/OR* nomVariable2:valeur2
 
- - tous les entreprises dont l'activité principale a été au moins à un moment donné 84.23Z ou 86.21Z
+ - toutes les entreprises dont l'activité principale a été au moins à un moment donné 56.10A (restauration traditionnelle) ou 56.10C (restauration rapide)
 ```
-/ws/siret?q=periode(ActivitePrincipale:84.23Z OR ActivitePrincipale:86.21Z)
+/ws/siret?q=periode(ActivitePrincipale:56.10A OR ActivitePrincipale:56.10C)
 ```
+ - tous les établissements sur la commune de Malakoff dont la dernière catégorie juridique de l'unité légale est 9220 (association déclarée)
+```
+/ws/siret?q=CodeCommuneEtablissement:92046 AND CategorieJuridique:9220
+```
+
+
+
+
+
+<!-- .slide: class="slide" -->
+### Recherche à une date donnée
+**Syntaxe** : periode(nomVariable:valeur)*&*date=AAAA-MM-JJ
+
+Cela renvoie malgré tout l'intégralité de l'historique.
+
+ - toutes les unités légales actives au 18/09/2009
+```
+/ws/siren?q=periode(EtatAdministratif:A)&date=2009-09-18
+```
+ - tous les établissements de Malakoff faisant principalement de la restauration traditionnelle et actifs au 18/09/2009
+```
+/ws/siret?q=CodeCommuneEtablissement:92046 AND periode(EtatAdministratifEtablissement:A AND ActivitePrincipaleEtablissement:56.10A)&date=2009-09-18
+```
+
+
+
+
+
+<!-- .slide: class="slide" -->
+### Recherche exacte
+**Syntaxe** : nomVariable:"valeur")
+
+ - toutes les unités légales actives au 03/12/2010 ayant la dénomination précise *LE VERRE GALANT*
+```
+/ws/siren?q=periode(Denomination:"LE VERRE GALANT" AND EtatAdministratif:A)&date=2010-12-03
+```
+
+
+
+
+
+<!-- .slide: class="slide" -->
+### Utilisation de caractères spéciaux
+
+
+
+
+
+
+<!-- .slide: class="slide" -->
+### Recherche avec une plage de valeurs
+
+
