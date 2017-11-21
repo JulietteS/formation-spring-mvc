@@ -1,6 +1,10 @@
 <!-- .slide: data-background-image="images/spring.png" data-background-size="1200px" class="chapter" -->
 ## 1
-### API Sirene : recherche sur les unités légales
+### Recherche sur les unités légales
+
+
+
+
 
 <!-- .slide: class="slide" -->
 <h3>Présentation du service</h3>
@@ -8,6 +12,7 @@ Obtenir les informations du répertoire sur une unité légale, identifiée par 
  - l'historique complet (sur dénomination, nom de naissance, catégorie juridique, état, nic du siège, activité principale)
  - l'état à une date donnée
  - l'état courant (à la date de la base)
+
 
 <!-- .slide: class="slide" -->
 ### Appel au service
