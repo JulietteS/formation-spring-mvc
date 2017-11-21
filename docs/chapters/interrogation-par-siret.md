@@ -1,4 +1,4 @@
-<!-- .slide: data-background-image="images/spring.png" data-background-size="1200px" class="chapter" -->
+<!-- .slide: class="chapter" -->
 ## 2
 ### Recherche sur les établissements
 
