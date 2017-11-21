@@ -1,6 +1,6 @@
 <!-- .slide: data-background-image="images/spring.png" data-background-size="1200px" class="chapter" -->
 ## 2
-### Recherche sur les unités légales
+### Recherche sur les établissements
 
 
 
@@ -8,8 +8,8 @@
 
 <!-- .slide: class="slide" -->
 <h3>Présentation du service</h3>
-Obtenir les informations du répertoire sur une unité légale, identifiée par son <span style="color:red">siren</span>
- - l'historique complet (sur dénomination, nom de naissance, catégorie juridique, état, nic du siège, activité principale)
+Obtenir les informations du répertoire sur un établissement, identifiée par son <span style="color:red">siret</span>
+ - l'historique complet (sur enseigne, activité principale de l'établissement, état, caractère employeur)
  - l'état à une date donnée
  - l'état courant (à la date de la base)
 
@@ -18,30 +18,141 @@ Obtenir les informations du répertoire sur une unité légale, identifiée par 
 
 
 <!-- .slide: class="slide" -->
-### Dépendances Maven
-```xml
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-webmvc</artifactId>
-    <version>${spring.version}</version>
-</dependency>
-<dependency>
-    <groupId></groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>3.1.0</version>
-    <scope>provided</scope>
-</dependency>
-<dependency>
-    <groupId></groupId>javax.servlet.jsp</groupId>
-    <artifactId>jsp-api</artifactId>
-    <version>2.2</version>
-    <scope>provided</scope>
-</dependency>
-<dependency>
-    <groupId></groupId>jstl</groupId>
-    <artifactId>jstl</artifactId>
-    <version>1.2</version>
-</dependency>
+### Appel au service
+
+GET /ws/siret/{siret}
+GET /ws/siret/{siret}?date={date}
+
+| Paramètre               | Description | Type de paramètre | Type  | Obligatoire                              |
+| ----------------------- | ------------|-------------------|-------|----------------------------------------- |
+| `siret`                 | Numéro siret de l'établissement (14 chiffres) | Path | String | Oui 												       |
+| `date`                  | Date à laquelle on souhaite connaître l'état (AAAA-MM-JJ) | Query | String | Non   |
+| `Accept`                | Format de la réponse demandé (par défaut Application/json), demander Text/csv pour du CSV |Header|String| Non |
+
+
+
+
+
+<!-- .slide: class="slide" -->
+### Exemple de requête sur le siret
+
+GET /ws/siret/39860733300059
+
+```json
+{
+    "Header": {
+        "Statut": 200,
+        "Message": "ok"
+    },
+    "Etablissement": {
+        "Siren": "398607333",
+        "Nic": "00059",
+        "StatutDiffusionEtablissement": "O",
+        "DateCreationEtablissement": "2015-01-09",
+        "NombrePeriodes": 4,
+        "UniteLegale": {
+            "StatutDiffusionUniteLegale": "O",
+            "DateCreationUniteLegale": "1994-10-10",
+            "Sigle": null,
+            "Sexe": 1,
+            "NomUsage": null,
+            "Prenom1": "BERTRAND",
+            "Prenom2": "CHARLES",
+            "Prenom3": null,
+            "Prenom4": null,
+            "PrenomUsuel": "BERTRAND",
+            "CaractereEmployeur": "O",
+            "EtatAdministratif": "A",
+            "Nom": "GRONDIN",
+            "Denomination": null,
+            "ActivitePrincipale": "47.81Z",
+            "LibelleActivite": "Commerce de détail alimentaire sur éventaires et marchés",
+            "NomenclatureActivite": "NAFRev2",
+            "CategorieJuridique": null,
+            "CategorieProfessionnelle": "1000",
+            "NICSiege": "00075"
+        },
+        "Adresse": {
+            "ComplementAdresseEtablissement": null,
+            "NumeroVoieEtablissement": "44",
+            "IndiceRepetitionEtablissement": null,
+            "TypeVoieEtablissement": "RUE",
+            "LibelleVoieEtablissement": "NANTIER DIDIEE",
+            "CodePostalEtablissement": "97490",
+            "LibelleCommuneEtablissement": "SAINT DENIS",
+            "LibelleCommuneEtrangerEtablissement": null,
+            "DistributionSpecialeEtablissement": null,
+            "CodeCommuneEtablissement": "97411",
+            "CedexEtablissement": null
+        },
+        "Periodes": [
+            {
+                "DateFin": null,
+                "DateDebut": "2016-04-01",
+                "EtatAdministratifEtablissement": "F",
+                "IndEtatAdministratifEtablissement": true,
+                "ActivitePrincipaleEtablissement": "56.10C",
+                "LibelleActiviteEtablissement": "Restauration de type rapide",
+                "NomenclatureActiviteEtablissement": "NAFRev2",
+                "IndActivitePrincipaleEtablissement": false,
+                "CaractereEmployeurEtablissement": "N",
+                "IndCaractereEmployeurEtablissement": false,
+                "Enseigne1": "MON CHINOIS PREFERE",
+                "Enseigne2": null,
+                "Enseigne3": null,
+                "IndEnseigneEtablissement": false
+            },
+            {
+                "DateFin": "2016-03-31",
+                "DateDebut": "2016-02-16",
+                "EtatAdministratifEtablissement": "A",
+                "IndEtatAdministratifEtablissement": false,
+                "ActivitePrincipaleEtablissement": "56.10C",
+                "LibelleActiviteEtablissement": "Restauration de type rapide",
+                "NomenclatureActiviteEtablissement": "NAFRev2",
+                "IndActivitePrincipaleEtablissement": true,
+                "CaractereEmployeurEtablissement": "N",
+                "IndCaractereEmployeurEtablissement": false,
+                "Enseigne1": "MON CHINOIS PREFERE",
+                "Enseigne2": null,
+                "Enseigne3": null,
+                "IndEnseigneEtablissement": true
+            },
+            {
+                "DateFin": "2016-02-15",
+                "DateDebut": "2015-04-27",
+                "EtatAdministratifEtablissement": "A",
+                "IndEtatAdministratifEtablissement": false,
+                "ActivitePrincipaleEtablissement": "47.81Z",
+                "LibelleActiviteEtablissement": "Commerce de détail alimentaire sur éventaires et marchés",
+                "NomenclatureActiviteEtablissement": "NAFRev2",
+                "IndActivitePrincipaleEtablissement": false,
+                "CaractereEmployeurEtablissement": "N",
+                "IndCaractereEmployeurEtablissement": true,
+                "Enseigne1": "CHAPO LA PAILLE",
+                "Enseigne2": null,
+                "Enseigne3": null,
+                "IndEnseigneEtablissement": false
+            },
+            {
+                "DateFin": "2015-04-26",
+                "DateDebut": "2015-01-09",
+                "EtatAdministratifEtablissement": "A",
+                "IndEtatAdministratifEtablissement": true,
+                "ActivitePrincipaleEtablissement": "47.81Z",
+                "LibelleActiviteEtablissement": "Commerce de détail alimentaire sur éventaires et marchés",
+                "NomenclatureActiviteEtablissement": "NAFRev2",
+                "IndActivitePrincipaleEtablissement": true,
+                "CaractereEmployeurEtablissement": "O",
+                "IndCaractereEmployeurEtablissement": true,
+                "Enseigne1": "CHAPO LA PAILLE",
+                "Enseigne2": null,
+                "Enseigne3": null,
+                "IndEnseigneEtablissement": true
+            }
+        ]
+    }
+}
 ```
 
 
@@ -49,111 +160,77 @@ Obtenir les informations du répertoire sur une unité légale, identifiée par 
 
 
 <!-- .slide: class="slide" -->
-<h3>Modèle MVC</h3>
-<p>Modèle &ndash; Vue &ndash; Contrôleur</p>
-<div class="center">
-    <img src="images/modele-mvc.png" style="width: 1000px" />
-</div>
+### Exemple de requête sur le siret (2)
 
+GET /ws/siret/39860733300059?date=2018-01-01
 
+Période courante
 
-
-
-<!-- .slide: class="slide" -->
-### Le contrôleur frontal : ServletDispatcher
-Toutes les requêtes sont interceptées par la même servlet
-
-ServletDispatcher, fournie par Spring MVC
-
- 1. intercepte la requête
- 2. délègue la requête au contrôleur adéquat
- 3. récupère le modèle
- 4. transmet le modèle au générateur de vue
- 5. récupère la vue générée
- 6. retourne la réponse au client
-
-La servlet possède son propre contexte Spring
-
-
-
-
-
-<!-- .slide: class="slide" -->
-### Déclarer la servlet ServletDispatcher
-```xml
-<servlet>
-    <servlet-name>servlet-dispatcher</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:servlet-dispatcher.xml</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-</servlet>
-<servlet-mapping>
-    <servlet-name>servlet-dispatcher</servlet-name>
-    <url-pattern>/</url-pattern>
-</servlet-mapping>
-```
-Attention : « / » et pas « /* »
-
-
-
-
-
-<!-- .slide: class="slide" -->
-### Configurer les servlets
-Dans l’exemple, on redirige toutes les URL vers Spring MVC
-
-On peut exclure certaines ressources
- - ressources statiques par exemple
-
-Attention : l’ordre de déclaration dans web.xml est important
-
-```xml
-<servlet>
-    <servlet-name>default</servlet-name>
-    <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-</servlet>
-<servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>/static/*</url-pattern>
-</servlet-mapping>
-```
-
-
-
-
-
-<!-- .slide: class="slide" -->
-<h3>Hiérarchie des contextes</h3>
-<div class="center">
-    <img src="images/double-contexte.png" style="width: 700px" />
-</div>
-
-
-
-
-
-<!-- .slide: class="slide" -->
-### Le résolveur de vues
-Indiquer à Spring quelle vue utiliser
-- JSP, Tiles…
-
-En général
-- `InternalResourceViewResolver`
-- À paramétrer pour faire la relation entre une chaîne de caractère et une JSP
-
-Attention : l’ordre de déclaration dans web.xml est important
-
-```xml
-<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix">
-        <value>/WEB-INF/views/</value>
-    </property>
-    <property name="suffix">
-        <value>.jsp</value>
-    </property>
-</bean>
+```json
+{
+    "Header": {
+        "Statut": 200,
+        "Message": "ok"
+    },
+    "Etablissement": {
+        "Siren": "398607333",
+        "Nic": "00059",
+        "StatutDiffusionEtablissement": "O",
+        "DateCreationEtablissement": "2015-01-09",
+        "NombrePeriodes": 4,
+        "UniteLegale": {
+            "StatutDiffusionUniteLegale": "O",
+            "DateCreationUniteLegale": "1994-10-10",
+            "Sigle": null,
+            "Sexe": 1,
+            "NomUsage": null,
+            "Prenom1": "BERTRAND",
+            "Prenom2": "CHARLES",
+            "Prenom3": null,
+            "Prenom4": null,
+            "PrenomUsuel": "BERTRAND",
+            "CaractereEmployeur": "O",
+            "EtatAdministratif": "A",
+            "Nom": "GRONDIN",
+            "Denomination": null,
+            "ActivitePrincipale": "47.81Z",
+            "LibelleActivite": "Commerce de détail alimentaire sur éventaires et marchés",
+            "NomenclatureActivite": "NAFRev2",
+            "CategorieJuridique": null,
+            "CategorieProfessionnelle": "1000",
+            "NICSiege": "00075"
+        },
+        "Adresse": {
+            "ComplementAdresseEtablissement": null,
+            "NumeroVoieEtablissement": "44",
+            "IndiceRepetitionEtablissement": null,
+            "TypeVoieEtablissement": "RUE",
+            "LibelleVoieEtablissement": "NANTIER DIDIEE",
+            "CodePostalEtablissement": "97490",
+            "LibelleCommuneEtablissement": "SAINT DENIS",
+            "LibelleCommuneEtrangerEtablissement": null,
+            "DistributionSpecialeEtablissement": null,
+            "CodeCommuneEtablissement": "97411",
+            "CedexEtablissement": null
+        },
+        "Periodes": [
+            {
+                "DateFin": null,
+                "DateDebut": "2016-04-01",
+                "EtatAdministratifEtablissement": "F",
+                "IndEtatAdministratifEtablissement": true,
+                "ActivitePrincipaleEtablissement": "56.10C",
+                "LibelleActiviteEtablissement": "Restauration de type rapide",
+                "NomenclatureActiviteEtablissement": "NAFRev2",
+                "IndActivitePrincipaleEtablissement": false,
+                "CaractereEmployeurEtablissement": "N",
+                "IndCaractereEmployeurEtablissement": false,
+                "Enseigne1": "MON CHINOIS PREFERE",
+                "Enseigne2": null,
+                "Enseigne3": null,
+                "IndEnseigneEtablissement": false
+            }
+        ]
+    }
+}
 ```
