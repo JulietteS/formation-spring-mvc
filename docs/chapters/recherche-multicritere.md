@@ -18,7 +18,8 @@ Rechercher librement sur toutes les unités légales/établissements à partir d
 
 <!-- .slide: class="slide" -->
 ### Recherche sur une variable non historisée
-*Syntaxe* : nomVariable:valeur
+**Syntaxe** : nomVariable:valeur
+
 Toutes les variables sont possibles, sauf LibelleActivite et NomenclatureActivite
  ```
 /ws/siret?q=CodeCommuneEtablissement:92046
@@ -1827,7 +1828,8 @@ Toutes les variables sont possibles, sauf LibelleActivite et NomenclatureActivit
 
 <!-- .slide: class="slide" -->
 ### Recherche sur une variable historisée
-periode(nomVariable:valeur)
+**Syntaxe** : periode(nomVariable:valeur)
+
 La recherche se fait par défaut sur tout l'historique, sinon il faut préciser un paramètre date.
 Exemples :
  - toutes les unités légales dont la dénomination contient ou a contenu le mot GAZ
@@ -1841,139 +1843,25 @@ Exemples :
 
 
 
+
+
 <!-- .slide: class="slide" -->
-Bonus : préciser le type de réponse :
-```java
-	@RequestMapping(value = "/accueil", produces = "application/json; charset=UTF-8")
+### Recherche par élimination
+**Syntaxe** : -nomVariable:valeur ou -periode(nomVariable:valeur)
+
+ - tous les établissements qui n'ont jamais été fermés
+```
+/ws/siret?q=-periode(EtatAdministratifEtablissement:F)
 ```
 
 
 
 
-
-<!-- .slide: data-background-image="images/question.png" data-background-size="700px" class="exercice" -->
-## Exercice
-
-
-
-
-
-
 <!-- .slide: class="slide" -->
-### Exemple 1 : cas simple
-```java
-	@RequestMapping("/accueil")
+### Recherche sur plusieurs variables
+**Syntaxe** : nomVariable1:valeur1 *AND/OR* nomVariable2:valeur2
+
+ - tous les entreprises dont l'activité principale a été au moins à un moment donné 84.23Z ou 86.21Z
 ```
- - http://serveur/accueil <!-- .element class="fragment highlight-green" -->
- - http://serveur/ <!-- .element class="fragment highlight-red" -->
- - http://serveur/accueil?sommaire=123456 <!-- .element class="fragment highlight-green" -->
- - http://serveur/accueil/123456 <!-- .element class="fragment highlight-red" -->
-
-
-
-
-
-
-<!-- .slide: class="slide" -->
-### Exemple 2 : plusieurs URI
-```java
-    @RequestMapping({ "/accueil", "/" })
+/ws/siret?q=periode(ActivitePrincipale:84.23Z OR ActivitePrincipale:86.21Z)
 ```
- - http://serveur/accueil/123456 <!-- .element class="fragment highlight-red" -->
- - http://serveur/accueil <!-- .element class="fragment highlight-green" -->
- - http://serveur/ <!-- .element class="fragment highlight-green" -->
- - http://serveur/accueil?sommaire=123456 <!-- .element class="fragment highlight-green" -->
-
-
-
-
-
-
-<!-- .slide: class="slide" -->
-### Exemple 3 : méthode HTTP
-```java
-    @RequestMapping(value = "/accueil", method = RequestMethod.GET)
-```
- - GET http://serveur/accueil <!-- .element class="fragment highlight-green" -->
- - PUT http://serveur/accueil <!-- .element class="fragment highlight-red" -->
- - POST http://serveur/accueil?sommaire=123456 <!-- .element class="fragment highlight-red" -->
- - GET http://serveur/accueil?sommaire=123456 <!-- .element class="fragment highlight-green" -->
-
-
-
-
-
-
-<!-- .slide: class="slide" -->
-### Exemple 4 : paramètres
-```java
-    @RequestMapping(value = "/accueil", params = { "!sommaire", "geo" })
-```
- - http://serveur/accueil?geo=COM-92046&id=123 <!-- .element class="fragment highlight-green" -->
- - http://serveur/accueil <!-- .element class="fragment highlight-red" -->
- - http://serveur/accueil/123456 <!-- .element class="fragment highlight-red" -->
- - http://serveur/accueil?geo=COM-80829 <!-- .element class="fragment highlight-green" -->
- - http://serveur/accueil?sommaire=123456&geo=DE <!-- .element class="fragment highlight-red" -->
-
-
-
-
-
-<!-- .slide: class="slide" -->
-### Récupérer des paramètres dans un contrôleur
-`@RequestParam`
-
-http://serveur/accueil<span style="color:red">?nom=Valeur</span>
-
-```java
-@Controller
-public class AccueilController {
-
-     @Autowired
-     private MessageService messageService; 
-
-     @RequestMapping("/accueil")
-     public String accueil(@RequestParam("nom") String nom, Model model) { 
-          model.addAttribute("message", messageService.message(nom));
-          return "accueil";
-     }
-}
-```
-Spring récupère la valeur du paramètre « nom » 
- - dans l’URL
- - et l’injecte dans la méthode de contrôleur
-
-
-
-
-
-<!-- .slide: class="slide" -->
-### Récupérer des paramètres dans un contrôleur
-`@PathVariable`
-
-http://serveur/personne<span style="color:red">/123456</span>
-
-```java
-@Controller
-public class AccueilController {
-
-     @Autowired
-     private PersonneService personneService;
-
-     @RequestMapping("/personne/{id}")
-     public String accueil(@PathVariable("id") Long id, Model model) { 
-          model.addAttribute("personne", personneService.personne(id));
-          return "personne";
-     }
-}
-```
-Il peut y avoir plusieurs `PathVariable`
- - On peut mélanger `PathVariable` et `RequestParam`
- - http://serveur/publication/{sommaire}/{produit}?intertire=1&vue=Complete
-
-
-
-
-
-<!-- .slide: data-background-image="images/tp.png" data-background-size="500px" class="tp" -->
-## [TP1](https://github.com/romain-warnan/formation-spring-mvc#0-récupérer-le-code-source-du-tp) 
