@@ -23,3 +23,12 @@
 
 
 
+<!-- .slide: class="slide" -->
+### L'utilisation de facettes
+
+
+
+
+
+
+
