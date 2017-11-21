@@ -20,7 +20,9 @@ Rechercher librement sur toutes les unités légales/établissements à partir d
 ### Recherche sur une variable non historisée
 *Syntaxe* : nomVariable:valeur
 Toutes les variables sont possibles, sauf LibelleActivite et NomenclatureActivite
-GET /ws/siret?q=CodeCommuneEtablissement:92046
+ ```
+/ws/siret?q=CodeCommuneEtablissement:92046
+ ```
 
 ```json
 {
@@ -1818,6 +1820,8 @@ GET /ws/siret?q=CodeCommuneEtablissement:92046
     ]
 }
 ```
+
+
 
 
 
