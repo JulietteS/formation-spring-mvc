@@ -1928,8 +1928,8 @@ Cela renvoie malgré tout l'intégralité de l'historique.
 
 <!-- .slide: class="slide" -->
 ### Recherche avec une plage de valeurs
-**Syntaxe** : nomVariable:[valeur1 TO valeur2]  (bornes incluses) et 
-              nomVariable:{valeur1 TO valeur2}  (bornes excluses)
+**Syntaxe** : nomVariable:[valeur1 TO valeur2]  (bornes incluses) 
+**Syntaxe** : nomVariable:{valeur1 TO valeur2}  (bornes excluses)
               
 Attention à utiliser l'encodage URL pour { (%7B) et } (%7D)
 
