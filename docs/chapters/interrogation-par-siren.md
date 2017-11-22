@@ -21,6 +21,7 @@ Obtenir les informations du répertoire sur une unité légale, identifiée par 
 ### Appel au service
 
 GET /ws/siren/{siren}
+
 GET /ws/siren/{siren}?date={date}
 
 | Paramètre               | Description | Type de paramètre | Type  | Obligatoire                              |
@@ -53,9 +54,9 @@ GET /ws/siren/{siren}?date={date}
 
 <!-- .slide: class="slide" -->
 ### Exemple de requête sur le siren
-
-GET /ws/siren/005520135
-
+```
+/ws/siren/005520135
+```
 ```json
 {
     "Header": {
@@ -204,9 +205,9 @@ GET /ws/siren/005520135
 
 <!-- .slide: class="slide" -->
 ### Exemple de requête sur le siren (2)
-
-GET /ws/siren/005520135?date=2018-01-01
-
+```
+/ws/siren/005520135?date=2018-01-01
+```
 Période courante
 
 ```json
@@ -262,9 +263,9 @@ Période courante
 
 <!-- .slide: class="slide" -->
 ### Exemple de requête sur le siren (3)
-
-GET /ws/siren/005520135?date=2018-01-01
-
+```
+/ws/siren/005520135?date=2018-01-01
+```
 Période trop ancienne
 ```json
 {
