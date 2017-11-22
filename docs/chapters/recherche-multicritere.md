@@ -1925,7 +1925,18 @@ Cela renvoie malgré tout l'intégralité de l'historique.
 
 
 
+
 <!-- .slide: class="slide" -->
 ### Recherche avec une plage de valeurs
+**Syntaxe** : nomVariable:[valeur1 TO valeur2]  (bornes incluses) et 
+              nomVariable:{valeur1 TO valeur2}  (bornes excluses)
+              
+Attention à utiliser l'encodage URL pour { (%7B) et } (%7D)
+
+- Recherche des unités légales faisant principalement de la culture agricole au 01/09/2016
+```
+/ws/siren?q=periode(ActivitePrincipale:[01.1 TO 01.3} AND NomenclatureActivite:NAFRev2)&date=2016-09-01
+```
+
 
 
