@@ -21,6 +21,7 @@ Obtenir les informations du répertoire sur un établissement, identifiée par s
 ### Appel au service
 
 GET /ws/siret/{siret}
+
 GET /ws/siret/{siret}?date={date}
 
 | Paramètre               | Description | Type de paramètre | Type  | Obligatoire                              |
@@ -35,9 +36,9 @@ GET /ws/siret/{siret}?date={date}
 
 <!-- .slide: class="slide" -->
 ### Exemple de requête sur le siret
-
-GET /ws/siret/39860733300059
-
+```
+/ws/siret/39860733300059
+```
 ```json
 {
     "Header": {
@@ -161,9 +162,9 @@ GET /ws/siret/39860733300059
 
 <!-- .slide: class="slide" -->
 ### Exemple de requête sur le siret (2)
-
-GET /ws/siret/39860733300059?date=2018-01-01
-
+```
+/ws/siret/39860733300059?date=2018-01-01
+```
 Période courante
 
 ```json
