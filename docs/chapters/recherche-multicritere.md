@@ -20,7 +20,7 @@ Rechercher librement sur toutes les unités légales/établissements à partir d
 ### Recherche sur une variable non historisée
 **Syntaxe** : nomVariable:valeur
 
-Toutes les variables sont possibles, sauf LibelleActivite et NomenclatureActivite
+Toutes les variables sont possibles, sauf LibelleActivite
  ```
 /ws/siret?q=CodeCommuneEtablissement:92046
  ```
