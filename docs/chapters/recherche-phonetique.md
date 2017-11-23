@@ -59,7 +59,7 @@ Il est possible de faire des recherches phonétiques sur la dénomination, à la
 <!-- .slide: class="slide" -->
 ### Recherche phonétique : exemple 2
 ```
-/ws/siret?q=Denomination:Stehle&champs=Denomination&nombre=3
+/ws/siret?q=Denomination:Stehle&champs=Denomination&nombre=1
 ```
 ```json
 {
@@ -75,22 +75,12 @@ Il est possible de faire des recherches phonétiques sur la dénomination, à la
             "UniteLegale": {
                 "Denomination": "SCI STEHLE"
             }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "JEAN LUC STEHLE CONSEIL"
-            }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "SOCIETE STEHLE GMBH"
-            }
         }
     ]
 }
 ```
 ```
-/ws/siret?q=DenomPhon:Stehle&champs=Denomination&nombre=10
+/ws/siret?q=DenomPhon:Stehle&champs=Denomination&nombre=1
 ```
 ```json
 {
@@ -102,51 +92,6 @@ Il est possible de faire des recherches phonétiques sur la dénomination, à la
         "Nombre": 10
     },
     "Etablissements": [
-        {
-            "UniteLegale": {
-                "Denomination": "STELI"
-            }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "STELEA"
-            }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "STELIE"
-            }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "STELIE"
-            }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "STELI"
-            }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "STELI"
-            }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "STELI"
-            }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "STELI"
-            }
-        },
-        {
-            "UniteLegale": {
-                "Denomination": "STELOY"
-            }
-        },
         {
             "UniteLegale": {
                 "Denomination": "STELI"
