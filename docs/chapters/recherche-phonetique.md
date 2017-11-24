@@ -8,12 +8,12 @@
 
 <!-- .slide: class="slide" -->
 ### Recherche phonétique
-Il est possible de faire des recherches phonétiques sur la dénomination, à la fois au niveau des unités légales (yc l'historique de dénomination) et au niveau des établissements. L'algorithme utilisé (*Beider-Morse*) génère assez peu de faux positifs (comparé à *Daitch-Mokotoff Soundex*)
+Il est possible de faire des recherches phonétiques sur la dénomination, à la fois au niveau des unités légales (yc l'historique de dénomination) et au niveau des établissements. L'algorithme utilisé (*Beider-Morse*) génère assez peu de faux positifs (comparé à *Daitch-Mokotoff Soundex*).
 
- 1. À partir du mot saisi, il essaie de deviner la langue (environ 200 règles) parmi 15
- 2. avec cette langue, il effectue une transcription phonétique d'abord exacte puis approchée
- 3. s'il n'arrive pas à déduire une langue, il fait une transcription phonétique générique exacte puis approchée
- 4. il recherche les échos correspondants dans l'index
+ 1. À partir du mot saisi, il essaie de deviner la langue (environ 200 règles) parmi 15;
+ 2. avec cette langue, il effectue une transcription phonétique d'abord exacte puis approchée;
+ 3. s'il n'arrive pas à déduire une langue, il fait une transcription phonétique générique exacte puis approchée;
+ 4. il recherche les échos correspondants dans l'index.
 
 
 
