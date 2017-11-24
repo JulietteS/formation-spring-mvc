@@ -107,7 +107,18 @@ Il est possible de faire des recherches phonétiques sur la dénomination, à la
 
 
 <!-- .slide: class="slide" -->
-### La pondération
+### La pondération et le score
+Le moteur de recherche calcule un score pour chaque requête et chaque document. Le score est fonction de :
+ * la fréquence du terme dans les champs demandés du document
+ * la fréquence inverse du terme dans tous les documents
+ * le boost du terme
+ * la normalisation du champ
+ * un facteur de coordination (nombre de termes de la recherche dans le document/nombre de termes dans la recherche)
+ * une normalisation de requête
+
+$Score(q,d) = \sum_{t in q} \left\( tf(t in d) \dot idf(t)^2 \dot t.getBoost() \dot norm(t,d) \right\) $
+
+
 ```
 /ws/siret?q=ponderation(Denomination*1.5 DenomPhon:Stehle)&champs=Denomination,Score&nombre=3
 ```
