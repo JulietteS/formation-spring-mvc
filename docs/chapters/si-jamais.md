@@ -30,7 +30,7 @@ Pour parcourir de manière plus efficace, il existe des curseurs.
 ```
 /ws/siren?curseur=*
 ```
-Le retour et l'en-tête Link contiennent alors le curseur suivant à pointer
+Le corps du retour (partie Header) et l'en-tête Link contiennent alors le curseur suivant à pointer
 ```
 /ws/siren?curseur=AoEpMDA1NDEwNzU4
 ```
