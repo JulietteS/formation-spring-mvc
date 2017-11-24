@@ -1864,7 +1864,7 @@ La recherche se fait par défaut sur tout l'historique, sinon il faut préciser 
 
  - toutes les entreprises dont l'activité principale a été au moins à un moment donné 56.10A (restauration traditionnelle) ou 56.10C (restauration rapide)
 ```
-/ws/siret?q=periode(ActivitePrincipale:56.10A OR ActivitePrincipale:56.10C)
+/ws/siren?q=periode(ActivitePrincipale:56.10A OR ActivitePrincipale:56.10C)
 ```
  - tous les établissements sur la commune de Malakoff dont la dernière catégorie juridique de l'unité légale est 9220 (association déclarée)
 ```
@@ -1911,7 +1911,7 @@ Cela renvoie malgré tout l'intégralité de l'historique.
 ### Utilisation de caractères spéciaux
 **\*** : permet de remplacer une chaîne de caractères
 ```
-/ws/siret?q=ActivitePrincipale:8*
+/ws/siret?q=ActivitePrincipale:80*
 ```
 **?** : permet de remplacer exactement un caractère
 ```
