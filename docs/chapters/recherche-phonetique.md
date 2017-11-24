@@ -109,15 +109,15 @@ Il est possible de faire des recherches phonétiques sur la dénomination, à la
 <!-- .slide: class="slide" -->
 ### La pondération et le score
 Le moteur de recherche calcule un score pour chaque requête et chaque document. Le score est fonction de :
- * la fréquence du terme dans les champs demandés du document
- * la fréquence inverse du terme dans tous les documents
- * le boost du terme
- * la normalisation du champ
- * un facteur de coordination (nombre de termes de la recherche dans le document/nombre de termes dans la recherche)
- * une normalisation de requête
+ * la fréquence du terme dans les champs demandés du document $tf(t \in d)$
+ * la fréquence inverse du terme dans tous les documents $idf(t)$
+ * le boost du terme $t.getBoost()$
+ * la normalisation du champ $norm(t,d)$
+ * un facteur de coordination (nombre de termes de la recherche dans le document/nombre de termes dans la recherche) $coord(q,d)$
+ * une normalisation de requête $queryNorm(q)$
 
 
-$Score(q,d) = \sum_{t in q} \left\( tf(t in d) \dot idf(t)^2 \dot t.getBoost() \dot norm(t,d) \right\) $
+$Score(q,d) = \sum_{t \in q} \left\( tf(t \in d) \cdot idf(t)^2 \cdot t.getBoost() \cdot norm(t,d) \right\) \cdot coord(q,d) \cdot queryNorm(q)$
 
 
 
@@ -125,6 +125,11 @@ $Score(q,d) = \sum_{t in q} \left\( tf(t in d) \dot idf(t)^2 \dot t.getBoost() \
 
 
 <!-- .slide: class="slide" -->
+### La pondération et le score
+La pondération permet de modifier le poids d'un champ dans une requête multicritère
+
+**Syntaxe** : ponderation(nomVariable1\*ponderation1 nomVariable2\*ponderation2:valeur) 
+
 ```
 /ws/siret?q=ponderation(Denomination*1.5 DenomPhon:Stehle)&champs=Denomination,Score&nombre=3
 ```
