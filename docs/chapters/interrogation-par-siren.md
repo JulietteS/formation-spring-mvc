@@ -264,7 +264,7 @@ Période courante
 <!-- .slide: class="slide" -->
 ### Exemple de requête sur le siren (3)
 ```
-/ws/siren/005520135?date=2018-01-01
+/ws/siren/005520135?date=1950-01-01
 ```
 Période trop ancienne
 ```json
